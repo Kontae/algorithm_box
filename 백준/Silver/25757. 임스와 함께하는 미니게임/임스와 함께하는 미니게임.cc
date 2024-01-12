@@ -1,11 +1,11 @@
-#include <set>
+#include <unordered_set>
 #include <iostream>
 using namespace std;
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	set<string> set;
+	unordered_set<string> set;
 	int n; char g;
 	int tmp = 0;
 	cin >> n >> g;
