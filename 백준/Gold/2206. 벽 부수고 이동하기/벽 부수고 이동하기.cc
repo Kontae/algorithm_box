@@ -22,9 +22,8 @@ int main()
 			arr[i][j] = s[j] - '0';
 		}
 	}
-
 	queue<pair<pair<int, int>,int>> q;
-	q.push({ { 0,0 },false });
+	q.push({ { 0,0 },0 });
 	dist[0][0][0] = 1;
 	while (!q.empty())
 	{
@@ -48,6 +47,7 @@ int main()
 				}
 				else
 				{
+					//다음 좌표 0이고 방문하지 않았으면
 					if (!dist[nx][ny][broken])
 					{
 						q.push({ {nx,ny},broken });
@@ -57,10 +57,10 @@ int main()
 			}
 		}
 	}
-	if (dist[n - 1][m - 1][1]!=0) cout << dist[n - 1][m - 1][1];
+	if (dist[n - 1][m - 1][1] != 0) cout << dist[n - 1][m - 1][1];
 	else 
 	{
-		if (dist[n - 1][m - 1][0]!=0) cout << dist[n - 1][m - 1][0];
+		if (dist[n - 1][m - 1][0] != 0) cout << dist[n - 1][m - 1][0];
 		else cout << -1 << '\n';
 	}
 	return 0;
