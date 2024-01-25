@@ -1,6 +1,5 @@
 #include <iostream>
 #include <queue>
-#include <algorithm>
 using namespace std;
 char arr[1001][1001];
 int distJ[1001][1001];
@@ -35,8 +34,6 @@ void Input()
 		}
 	}
 }
-//Fire의 위치를 동시에 모두 넣어줘야함!!!
-
 void initF()
 {
 	while (!q.empty())
@@ -50,7 +47,6 @@ void initF()
 			int ny = y + dy[i];
 			if (nx >= 0 && ny >= 0 && nx < n && ny < m && arr[nx][ny] != '#' && !distF[nx][ny])
 			{
-				
 				q.push({ nx,ny });
 				distF[nx][ny] = distF[x][y] + 1;
 			}
