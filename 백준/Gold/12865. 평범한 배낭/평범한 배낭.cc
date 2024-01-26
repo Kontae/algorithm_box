@@ -9,11 +9,11 @@ int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	int n, k, weight, price;
+	int n, k;
 	
 	cin >> n >> k;
 	vector<pair<int, int>> bag(101);
-	vector<vector<int>> DP(n+1, vector<int>(k+1, 0));
+	vector<int> DP(k + 1, 0);
 	for (int i = 1; i <= n; i++)
 	{
 		cin >> bag[i].first >> bag[i].second;
@@ -22,27 +22,11 @@ int main()
 	for (int i = 1; i <= n; i++)
 	{
 		//무게
-		for (int j = 1; j <= k; j++)
+		for (int j = k; j >= bag[i].first; j--)
 		{
-			if (j - bag[i].first >= 0)
-			{
-				DP[i][j] = MAX(DP[i-1][j], DP[i-1][j - bag[i].first] + bag[i].second);
-				
-			}
-			else
-			{
-				DP[i][j] = DP[i-1][j];
-			}
+			DP[j] = MAX(DP[j], DP[j - bag[i].first] + bag[i].second);
 		}
 	}
-	/*for (int i=1;i<=n;i++)
-	{
-		for (int j=1;j<=k;j++)
-		{
-			cout << DP[i][j] << " ";
-		}
-		cout << '\n';
-	}*/
-	cout << DP[n][k] << '\n';
+	cout << DP[k] << '\n';
 	return 0;
 }
