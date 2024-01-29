@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-int sum[10001];
+int arr[10001];
 int main()
 {
 	ios::sync_with_stdio(false);
@@ -8,27 +8,28 @@ int main()
 	int n, m;
 	int answer = 0;
 	cin >> n >> m;
-	for (int i = 1; i <= n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		cin >> sum[i];
-		sum[i] += sum[i - 1];
+		cin >> arr[i];
 	}
-	for (int left = 0; left < n; left++)
+	int left = 0;
+	int right = 0;
+	int sum = arr[0];
+	while (right < n)
 	{
-		int right = left + 1;
-		while (right <= n)
+		if (sum < m)
 		{
-			int tmp = sum[right] - sum[left];
-			if (tmp == m)
-			{
-				answer++;
-				break;
-			}
-			else if (tmp > m)
-			{
-				break;
-			}
-			right++;
+			sum += arr[++right];
+		}
+		else if (sum > m)
+		{
+			sum -= arr[left++];
+		}
+		else
+		{
+			answer++;
+			sum -= arr[left++];
+			sum += arr[++right];
 		}
 	}
 	cout << answer << '\n';
