@@ -55,8 +55,6 @@ int main()
 		{
 			answer++;
 			sum += v[++right];
-			sum -= v[left++];
-
 		}
 	}
 	if (prime[Num] != 0)answer++;
