@@ -13,7 +13,7 @@ void PushPrimeNum()
 	for (int i = 2; i * i <= Num; i++)
 	{
 		if (prime[i] == 0) continue;
-		for (int j = i * 2; j <= Num; j += i)
+		for (int j = i * i; j <= Num; j += i)
 		{
 			prime[j] = 0;
 		}
