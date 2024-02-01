@@ -1,42 +1,32 @@
 #include <iostream>
-#include <cmath>
+#include <climits>
 using namespace std;
 int n;
-int answer = (-1) * pow(2, 31);
 string s;
-int MAX(int a, int b)
-{
-	return (a > b ? a : b);
-}
+int answer = INT_MIN;
 int cal(int a, int b, char oper)
 {
 	if (oper == '+') return a + b;
-	else if (oper == '-')return a - b;
-	else if (oper == '*')return a * b;
-	return 0;
+	if (oper == '-')return a - b;
+	if (oper == '*')return a * b;
 }
-void DFS(int cnt, int num)
+void DFS(int idx, int num)
 {
-	if (cnt > n - 1)
+	if (idx > n - 1)
 	{
-		answer = MAX(answer, num);
+		answer = answer > num ? answer : num;
 		return;
 	}
 	char op;
-	if (cnt == 0)
+	if (idx == 0) op = '+';
+	else op = s[idx - 1];
+	
+	if (idx + 2 < n)
 	{
-		op = '+';
+		int tmp = cal(s[idx] - '0', s[idx + 2] - '0', s[idx + 1]);
+		DFS(idx + 4, cal(num, tmp, op));
 	}
-	else
-	{
-		op = s[cnt - 1];
-	}
-	if (cnt + 2 < n)
-	{
-		int tmp = cal(s[cnt] - '0', s[cnt + 2] - '0', s[cnt + 1]);
-		DFS(cnt + 4, cal(num, tmp, op));
-	}
-	DFS(cnt + 2, cal(num, s[cnt] - '0', op));
+	DFS(idx + 2, cal(num, s[idx] - '0', op));
 }
 int main()
 {
