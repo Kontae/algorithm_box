@@ -2,7 +2,7 @@
 using namespace std;
 int n, k, zeroCnt, answer;
 int belt[202];
-bool robot[202];
+bool robot[101];
 void Input()
 {
 	cin >> n >> k;
