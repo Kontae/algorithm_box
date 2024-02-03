@@ -1,23 +1,25 @@
 #include <iostream>
-#include <vector>
 using namespace std;
-int n, m, type, x, y;
-int getParent(int a,vector<int>&root)
+int arr[1000001];
+int n, m, x, y, type;
+int GetP(int a)
 {
-	if (root[a] == a) return a;
-	return root[a] = getParent(root[a],root);
+	if (arr[a] == a) return a;
+	return arr[a] = GetP(arr[a]);
 }
-void Union(int a, int b,vector<int>&root)
+
+void Union(int a, int b)
 {
-	a = getParent(a,root);
-	b = getParent(b,root);
-	root[a] = b;
+	a = GetP(a);
+	b = GetP(b);
+	if (a < b) arr[b] = a;
+	else arr[a] = b;
 }
-void Find(int a, int b,vector<int>&root)
+void Find(int a, int b)
 {
-	a = getParent(a,root);
-	b = getParent(b,root);
-	if (a == b)cout << "YES\n";
+	a = GetP(a);
+	b = GetP(b);
+	if (a == b) cout << "YES\n";
 	else cout << "NO\n";
 }
 int main()
@@ -25,22 +27,15 @@ int main()
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 	cin >> n >> m;
-	vector<int> root(n + 1);
 	for (int i = 0; i <= n; i++)
 	{
-		root[i] = i;
+		arr[i] = i;
 	}
-	for (int i = 0; i < m; i++)
+	while (m--)
 	{
 		cin >> type >> x >> y;
-		if (type == 0)
-		{
-			Union(x, y,root);
-		}
-		else
-		{
-			Find(x, y,root);
-		}
+		if (type == 0) Union(x, y);
+		else Find(x, y);
 	}
 	return 0;
 }
