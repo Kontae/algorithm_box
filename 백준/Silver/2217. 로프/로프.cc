@@ -2,10 +2,6 @@
 #include <queue>
 using namespace std;
 int n, x, cnt, ans = -1;
-int MAX(int a, int b)
-{
-	return (a > b ? a : b);
-}
 int main()
 {
 	ios::sync_with_stdio(false);
@@ -21,7 +17,7 @@ int main()
 	{
 		cnt++;
 		int num = pq.top();
-		if (ans < num * cnt) ans = num * cnt;
+		if (ans <= num * cnt) ans = num * cnt;
 		pq.pop();
 	}
 	cout << ans << '\n';
