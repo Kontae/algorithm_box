@@ -2,28 +2,32 @@
 #include <algorithm>
 #include <queue>
 using namespace std;
-int M, N;
-int Map[1001][1001];
-int Check[1001][1001];
-int dx[] = { 1,-1,0,0 };
-int dy[] = { 0,0,1,-1 };
-queue<pair<int, int>> q;
-int main(void) 
+int arr[1001][1001];
+int dist[1001][1001];
+int dx[4] = { 1,-1,0,0 };
+int dy[4] = { 0,0,1,-1 };
+int main()
 {
-	cin >> M >> N;
-	for (int i = 0; i < N; i++)
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+	int n, m;
+	cin >> m >> n;
+	queue<pair<int, int>> q;
+	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < M; j++)
+		for (int j = 0; j < m; j++)
 		{
-			cin >> Map[i][j];
-			Check[i][j] = -1;
-			if (Map[i][j] == 1)
+			cin >> arr[i][j];
+			dist[i][j] = -1;
+			if (arr[i][j] == 1)
 			{
 				q.push({ i,j });
-				Check[i][j] = 0;
+				dist[i][j] = 0;
 			}
 		}
 	}
+
 	while (!q.empty())
 	{
 		int x = q.front().first;
@@ -33,31 +37,31 @@ int main(void)
 		{
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-			if (nx >= 0 && nx < N && ny >= 0 && ny < M)
+			if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
+			if (arr[nx][ny] == 0 && dist[nx][ny] == -1)
 			{
-				if (Map[nx][ny] == 0 && Check[nx][ny] == -1)
-				{
-					Check[nx][ny] = Check[x][y] + 1;
-					q.push({ nx,ny });
-				}
+				dist[nx][ny] = dist[x][y] + 1;
+				q.push({ nx,ny });
 			}
 		}
 	}
+
 	int answer = -1;
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < M; j++)
+		for (int j = 0; j < m; j++)
 		{
-			answer = max(answer, Check[i][j]);
+			answer = max(answer, dist[i][j]);
 		}
 	}
-	for (int i = 0; i < N; i++)
+
+	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < M; j++)
+		for (int j = 0; j < m; j++)
 		{
-			if (Check[i][j] == -1 && Map[i][j] == 0)
-				answer = -1;
+			if (arr[i][j] == 0 && dist[i][j] == -1) answer = -1;
 		}
 	}
 	cout << answer << '\n';
+	return 0;
 }
