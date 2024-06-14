@@ -12,8 +12,7 @@ vector<string> solution(vector<string> record) {
     for(int i=0;i<record.size();i++)
     {
         string fi,se,th;
-        stringstream ss;
-        ss.str(record[i]);
+        stringstream ss(record[i]);
         ss>>fi>>se>>th;
         
         if(fi=="Enter")
