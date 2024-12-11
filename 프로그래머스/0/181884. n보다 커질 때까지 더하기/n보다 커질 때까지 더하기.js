@@ -1,4 +1,4 @@
 function solution(numbers, n) {
     
-    return numbers.reduce((cur,acc)=>cur>n?cur:cur+acc,0);
+    return numbers.reduce((acc,cur)=>acc>n?acc:cur+acc,0);
 }
