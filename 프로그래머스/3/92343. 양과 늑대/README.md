@@ -1,6 +1,6 @@
 # [level 3] 양과 늑대 - 92343 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/92343) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/92343?language=cpp) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 03월 07일 19:03:14
+2025년 03월 07일 19:04:10
 
 ### 문제 설명
 

@@ -15,38 +15,41 @@ void connectGraph(vector<vector<int>>& graph, vector<vector<int>>& edges)
     }
 }
 
-void dfs(vector<vector<int>>& graph, vector<int>& info, int visit, int sheep, int wolf)
+// 초기 0번 노드 연결 세팅
+void initNext(vector<int>& next, vector<vector<int>>& graph)
 {
+    for(int i=0;i<graph[0].size();i++)
+    {
+        next.push_back(graph[0][i]);
+    }
+}
+
+void dfs(vector<vector<int>>& graph, vector<int>& info, vector<int>& next, int sheep, int wolf, int cur)
+{
+    if(info[cur]) wolf++;
+    else sheep++;
     if(sheep<=wolf) return;
     answer=answer>sheep?answer:sheep;
     
-    for(int i=0;i<info.size();i++)
+    for(int i=0;i<next.size();i++)
     {
-        if(visit&(1<<i))
+        vector<int> tmp = next;
+        tmp.erase(tmp.begin()+i);
+        for(int j=0;j<graph[next[i]].size();j++)
         {
-            for(int next : graph[i])
-            {
-                if(!(visit & (1 << next)))
-                {
-                    int nextSheep = sheep + (info[next]==0);
-                    int nextWolf = wolf + (info[next]==1);
-                    dfs(graph,info,visit | (1<<next),nextSheep,nextWolf);
-                }
-            }
+            tmp.push_back(graph[next[i]][j]);
         }
+        dfs(graph,info,tmp,sheep,wolf,next[i]);
     }
 }
 
 int solution(vector<int> info, vector<vector<int>> edges) {
     
     vector<vector<int>> graph(info.size());
+    vector<int> next;
     connectGraph(graph,edges);
-    
-    int initialVisited = 1;
-    int initialSheep = info[0] == 0 ? 1 : 0;
-    int initialWolf = info[0] == 1 ? 1 : 0;
-                              
-    dfs(graph,info,initialVisited,initialSheep,initialWolf);
+    initNext(next,graph);
+    dfs(graph,info,next,0,0,0);
     
     return answer;
 }
