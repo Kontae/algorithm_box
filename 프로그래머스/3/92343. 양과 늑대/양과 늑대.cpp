@@ -1,13 +1,13 @@
 #include <string>
 #include <vector>
-#include <iostream>
 
 using namespace std;
-
 int answer = 0;
-void connectEdges(vector<vector<int>>& edges,vector<vector<int>>& graph)
+
+// 그래프 연결
+void connectGraph(vector<vector<int>>& graph, vector<vector<int>>& edges)
 {
-    for(auto x:edges)
+    for(auto& x : edges)
     {
         int from = x[0];
         int to = x[1];
@@ -15,13 +15,21 @@ void connectEdges(vector<vector<int>>& edges,vector<vector<int>>& graph)
     }
 }
 
-void dfs(vector<int>& info, vector<vector<int>>& graph, vector<int>& next, int sheep, int wolf, int cur)
+// 초기 0번 노드 연결 세팅
+void initNext(vector<int>& next, vector<vector<int>>& graph)
+{
+    for(int i=0;i<graph[0].size();i++)
+    {
+        next.push_back(graph[0][i]);
+    }
+}
+
+void dfs(vector<vector<int>>& graph, vector<int>& info, vector<int>& next, int sheep, int wolf, int cur)
 {
     if(info[cur]) wolf++;
     else sheep++;
-    
-    if(wolf>=sheep) return;
-    answer=sheep>answer?sheep:answer;
+    if(sheep<=wolf) return;
+    answer=answer>sheep?answer:sheep;
     
     for(int i=0;i<next.size();i++)
     {
@@ -31,23 +39,17 @@ void dfs(vector<int>& info, vector<vector<int>>& graph, vector<int>& next, int s
         {
             tmp.push_back(graph[next[i]][j]);
         }
-        dfs(info,graph,tmp,sheep,wolf,next[i]);
+        dfs(graph,info,tmp,sheep,wolf,next[i]);
     }
 }
 
 int solution(vector<int> info, vector<vector<int>> edges) {
     
-    int size = info.size();
-    vector<vector<int>> graph(size);
+    vector<vector<int>> graph(info.size());
     vector<int> next;
-    connectEdges(edges,graph);
-    
-    // 0번 노드에서부터 시작
-    for(int i=0;i<graph[0].size();i++){
-        next.push_back(graph[0][i]);
-    }
-    
-    dfs(info,graph,next,0,0,0);
+    connectGraph(graph,edges);
+    initNext(next,graph);
+    dfs(graph,info,next,0,0,0);
     
     return answer;
 }
