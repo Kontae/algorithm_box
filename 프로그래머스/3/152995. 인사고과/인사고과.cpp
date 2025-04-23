@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <iostream>
 using namespace std;
 
 bool cmp(pair<pair<int,int>,int> A, pair<pair<int,int>,int> B)
