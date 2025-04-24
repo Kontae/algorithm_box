@@ -33,8 +33,6 @@ string convertItoS(ll n)
     return s;
 }
 string solution(long long n, vector<string> bans) {
-    string answer = "";
-    ll answerNum = 0;
     vector<ll> v;
     for(auto &x: bans)
     {
@@ -43,11 +41,10 @@ string solution(long long n, vector<string> bans) {
     
     sort(v.begin(),v.end());
     
-    for(auto y: v)
+    for(auto &y: v)
     {
         if(y<=n) n++;
         else break;
     }
-    answer = convertItoS(n);
-    return answer;
+    return convertItoS(n);
 }
