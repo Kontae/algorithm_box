@@ -93,7 +93,7 @@ vector<string> solution(vector<string> commands) {
                 v[r1][c1].first=mergeValue;
                 v[r1][c1].second=newGroupId;
             }
-                    
+
             if(v[r2][c2].second!=0)
             {
                 int oldGroup=v[r2][c2].second;
@@ -119,12 +119,12 @@ vector<string> solution(vector<string> commands) {
         {
             int r,c;
             ss>>r>>c;
-            
+
             if(v[r][c].second==0) continue;
-            
+
             string keepValue=v[r][c].first;
             int groupId=v[r][c].second;
-            
+
             for(int i=1;i<=50;i++)
             {
                 for(int j=1;j<=50;j++)
@@ -151,6 +151,6 @@ vector<string> solution(vector<string> commands) {
             answer.push_back(v[r][c].first==""?"EMPTY":v[r][c].first);
         }
     }
-    
+
     return answer;
 }
