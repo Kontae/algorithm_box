@@ -49,7 +49,7 @@ class Solution {
     private int countSum(String[] arr, String type) {
         int cnt = 0;
         for(String x : arr) {
-            if(x.equals(type) && x != null) {
+            if(x.equals(type)) {
                 cnt++;
             }
         }
