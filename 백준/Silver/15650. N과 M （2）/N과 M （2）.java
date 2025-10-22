@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
     static int N, M;
-    static int[] result;
+    static int[] result = new int[9];
     static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
@@ -16,7 +16,6 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        result = new int[M];
 
         Comb(0, 1);
 
